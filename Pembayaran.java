@@ -1,4 +1,3 @@
-// File: Pembayaran.java
 import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.Scanner;
@@ -6,7 +5,7 @@ import java.util.Scanner;
 public class Pembayaran {
     public void PembayaranTransfer(Transaksi trx, Scanner scanner) {
         NumberFormat nf = NumberFormat.getInstance(new Locale("id", "ID"));
-        System.out.println("Transfer ke BCA 123 a/n Wazgeming.Playstation sebesar Rp " + nf.format(trx.getHargaTotal()));
+        System.out.println("Transfer ke BCA 24523 a/n WazgemingPS sebesar Rp " + nf.format(trx.getHargaTotal()));
         System.out.println("Note: Nominal yang kelebihan tidak bisa dikembalikan!");
         System.out.print("Masukkan jumlah transfer : ");
         int bayar = scanner.nextInt();
@@ -18,6 +17,7 @@ public class Pembayaran {
             System.out.println("===============================================================");
             System.out.println("Pembayaran berhasil. Terima kasih!");
             System.out.println("Pesanan anda sudah terkirim!");
+            System.out.println("Kurir sedang menuju ke tujuan.");
             System.out.println("===============================================================");
 
         }
@@ -30,5 +30,5 @@ public class Pembayaran {
         System.out.println("===============================================================");
 
     }
-    
+
 }
