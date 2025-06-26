@@ -6,7 +6,7 @@ public class MenuPemesanan {
     public void Pemesanan(Scanner scanner) {
         boolean ulangTransaksi;
         do {
-            System.out.println("\n======================== UNIT PLAYSTATION =====================");
+            System.out.println("\n======================= UNIT PLAYSTATION ======================");
             System.out.println("1. Playstation 3 (Rp.  60.000/Hari)");
             System.out.println("2. Playstation 4 (Rp. 100.000/Hari)");
             System.out.println("3. Playstation 5 (Rp. 300.000/Hari)");
@@ -25,6 +25,10 @@ public class MenuPemesanan {
                 ulangTransaksi = konfirmasiUlang(scanner);
                 continue;
             }
+            System.out.println("======================== SPECIAL DISKON =======================");
+            System.out.println("(15%) Untuk penyewaan 3 hari dan seterusnya!");
+            System.out.println("(25%) Untuk penyewaan 7 hari dan seterusnya!");
+            System.out.println("===============================================================");
 
             System.out.print("Masukkan jumlah hari sewa   : ");
             int hariSewa = scanner.nextInt();
@@ -40,25 +44,23 @@ public class MenuPemesanan {
             System.out.println("===============================================================");
             System.out.println("\n====================== RINCIAN TRANSAKSI ======================");
             trx.dataDiri();
-            System.out.println("===============================================================");
+            System.out.println("==============================================================");
 
-            System.out.print("Konfirmasi transaksi (y/n): ");
-            String konfirmasi = scanner.next();
-            if (!konfirmasi.equalsIgnoreCase("y")) {
+            String konfirmasi = konfirmasiYorN(scanner, "Konfirmasi transaksi (y/t): ");
+            if (!konfirmasi.equals("y")) {
                 ulangTransaksi = konfirmasiUlang(scanner);
                 continue;
             }
 
             System.out.println("\n======================= METODE PEMBAYARAN =====================");
-
             System.out.println("1. Transfer");
             System.out.println("2. COD");
             System.out.print("Pilihan : ");
-            int pil = scanner.nextInt();
-            System.out.println("===============================================================");
+            int pilBayar = scanner.nextInt();
+            System.out.println("==============================================================");
 
-            if (pil == 1) pembayaran.PembayaranTransfer(trx, scanner);
-            else if (pil == 2) pembayaran.PembayaranCOD(trx);
+            if      (pilBayar == 1) pembayaran.PembayaranTransfer(trx, scanner);
+            else if (pilBayar == 2) pembayaran.PembayaranCOD(trx);
             else System.out.println("Metode tidak valid.");
 
             ulangTransaksi = konfirmasiUlang(scanner);
@@ -66,8 +68,19 @@ public class MenuPemesanan {
     }
 
     private boolean konfirmasiUlang(Scanner scanner) {
-        System.out.print("\nIngin mengulangi transaksi? (y/n): ");
-        String ulang = scanner.next();
-        return ulang.equalsIgnoreCase("y");
+        String ulang = konfirmasiYorN(scanner, "\nIngin mengulangi transaksi? (y/t): ");
+        return ulang.equals("y");
+    }
+
+    private String konfirmasiYorN(Scanner scanner, String prompt) {
+        String input;
+        do {
+            System.out.print(prompt);
+            input = scanner.next().trim().toLowerCase();
+            if (!input.equals("y") && !input.equals("t")) {
+                System.out.println("Input tidak valid. Masukkan hanya 'y' atau 't'.");
+            }
+        } while (!input.equals("y") && !input.equals("t"));
+        return input;
     }
 }
