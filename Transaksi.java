@@ -3,21 +3,15 @@ import java.time.LocalDate;
 import java.util.Locale;
 
 public class Transaksi {
-    private String      nama;
-    private String      alamat;
-    private String      unit;
-    private String      noWA;
-    private int         hariSewa;
-    private int         hargaSewa;
-    private int         hargaTotal;
-    private int         diskon;
+    private String      nama, alamat, unit, noWA;
+    private int         hariSewa, hargaSewa, hargaTotal, diskon;
     private LocalDate   tanggalSelesai;
 
     public Transaksi(String unit, int hariSewa, String nama, String alamat, String noWA) {
-        this.hariSewa = hariSewa;
-        this.nama     = nama;
-        this.alamat   = alamat;
-        this.noWA     = noWA;
+        this.hariSewa   = hariSewa;
+        this.nama       = nama;
+        this.alamat     = alamat;
+        this.noWA       = noWA;
 
         if (unit.equals("1")) {
             this.unit = "Playstation 3";
@@ -25,25 +19,16 @@ public class Transaksi {
         } else if (unit.equals("2")) {
             this.unit = "Playstation 4";
             this.hargaSewa = 100000;
-        } else if (unit.equals("3")) {
+        } else {
             this.unit = "Playstation 5";
             this.hargaSewa = 300000;
-        } else {
-            this.unit = "gatau";
-            this.hargaSewa = 0;
         }
 
-        if (hariSewa >= 7) {
-            this.diskon = 25;
-        } else if (hariSewa >= 3) {
-            this.diskon = 15;
-        } else {
-            this.diskon = 0;
-        }
+        this.diskon = (hariSewa >= 7) ? 25 : (hariSewa >= 3) ? 15 : 0;
 
-        int hargaSebelumDiskon = this.hargaSewa * hariSewa;
-        this.hargaTotal = hargaSebelumDiskon - (hargaSebelumDiskon * this.diskon / 100);
-        this.tanggalSelesai = LocalDate.now().plusDays(hariSewa);
+        int hargaSebelumDiskon  = this.hargaSewa * hariSewa;
+        this.hargaTotal         = hargaSebelumDiskon - (hargaSebelumDiskon * this.diskon / 100);
+        this.tanggalSelesai     = LocalDate.now().plusDays(hariSewa);
 
         CekStock.tambahPenyewa(this);
     }
@@ -65,19 +50,9 @@ public class Transaksi {
         return "Rp. " + formatRupiah.format(amount);
     }
 
-    public int getHargaTotal() {
-        return hargaTotal;
-    }
-    public String getUnit() {
-        return unit;
-    }
-    public LocalDate getTanggalSelesai() {
-        return tanggalSelesai;
-    }
-    public String getNama() {
-        return nama;
-    }
-    public String getNoWA() {
-        return noWA;
-    }
-} 
+    public int          getHargaTotal()     { return hargaTotal; }
+    public String       getUnit()           { return unit; }
+    public LocalDate    getTanggalSelesai() { return tanggalSelesai; }
+    public String       getNama()           { return nama; }
+    public String       getNoWA()           { return noWA; }
+}
