@@ -25,11 +25,22 @@ public class Index {
                 System.out.println("Input tidak valid.");
             }
 
-            System.out.print("\nIngin kembali ke menu utama? (y/n): ");
-            ulang = scanner.next();
-        } while (ulang.equalsIgnoreCase("y"));
+            ulang = konfirmasiYorN(scanner, "\nIngin kembali ke menu utama? (y/t): ");
+        } while (ulang.equals("y"));
 
         System.out.println("Terima kasih telah menggunakan layanan kami!");
         scanner.close();
+    }
+
+    private static String konfirmasiYorN(Scanner scanner, String prompt) {
+        String input;
+        do {
+            System.out.print(prompt);
+            input = scanner.next().trim().toLowerCase();
+            if (!input.equals("y") && !input.equals("t")) {
+                System.out.println("Input tidak valid. Masukkan hanya 'y' atau 't'.");
+            }
+        } while (!input.equals("y") && !input.equals("t"));
+        return input;
     }
 }
