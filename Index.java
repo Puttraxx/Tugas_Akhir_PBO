@@ -25,14 +25,14 @@ public class Index {
                 System.out.println("Input tidak valid.");
             }
 
-            ulang = konfirmasiYorN(scanner, "\nIngin kembali ke menu utama? (y/t): ");
+            ulang = konfirmasiYorT(scanner, "\nIngin kembali ke menu utama? (y/t): ");
         } while (ulang.equals("y"));
 
         System.out.println("Terima kasih telah menggunakan layanan kami!");
         scanner.close();
     }
 
-    private static String konfirmasiYorN(Scanner scanner, String prompt) {
+    private static String konfirmasiYorT(Scanner scanner, String prompt) {
         String input;
         do {
             System.out.print(prompt);
